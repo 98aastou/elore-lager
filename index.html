@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Eloré lager | Garage Hair Club</title>
+<link rel="icon" href="data:," />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;600&family=Outfit:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#16130f; --panel:#1f1b17; --panel2:#27221d; --line:rgba(250,248,245,.09);
+    --text:#faf8f5; --muted:#a39685; --faint:#6f655a;
+    --accent:#c4a265; --ok:#7fb58a; --warn:#e0a458; --bad:#d9705f;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.4}
+  .wrap{max-width:720px;margin:0 auto;padding:28px 16px 80px}
+  .logo{text-align:center;text-transform:uppercase;margin:4px 0 26px}
+  .logo b{display:block;font-weight:200;font-size:26px;letter-spacing:.3em;padding-left:.3em}
+  .logo span{display:block;font-weight:300;font-size:8px;letter-spacing:.55em;padding-left:.55em;margin-top:5px;color:var(--muted)}
+  h1{font-family:'Outfit',sans-serif;font-weight:600;font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+  .status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-bottom:20px;min-height:20px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+  .dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)}
+  .banner{border:1px solid rgba(224,164,88,.35);background:rgba(224,164,88,.08);color:#f0d2a4;border-radius:10px;padding:12px 14px;font-size:14px;margin-bottom:18px}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 12px}
+  .tile .n{font-family:'Outfit',sans-serif;font-weight:600;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+  .tile .l{color:var(--muted);font-size:12px;margin-top:7px;text-transform:uppercase;letter-spacing:.08em}
+  .tile.hot .n{color:var(--accent)}
+  .tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font:inherit;font-size:15px;font-weight:500;padding:10px 12px;margin-bottom:-1px;cursor:pointer}
+  .tab[aria-selected=true]{color:var(--text);border-bottom-color:var(--accent)}
+  .tab .c{color:var(--accent);margin-left:5px;font-variant-numeric:tabular-nums}
+  .tools{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+  .tools .grow{flex:1}
+  button.btn,select,input[type=search]{font:inherit;font-size:14px;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 12px}
+  button.btn{cursor:pointer}
+  button.btn:active{transform:translateY(1px)}
+  input[type=search]{flex:1;min-width:140px}
+  label.chk{color:var(--muted);font-size:14px;display:flex;gap:6px;align-items:center}
+  .list{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line)}
+  .row:first-child{border-top:0}
+  .row .main{flex:1;min-width:0}
+  .row .t{font-weight:500}
+  .row .s{color:var(--muted);font-size:13px;margin-top:2px}
+  .row .q{font-family:'Outfit',sans-serif;font-weight:600;font-size:22px;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  .row .q small{display:block;font-family:'DM Sans',sans-serif;font-weight:400;font-size:12px;color:var(--muted)}
+  .row .q.fill{color:var(--accent)}
+  .row .q.low{color:var(--bad)}
+  .row.mute .t,.row.mute .q{color:var(--faint)}
+  .row.mute .t{text-decoration:line-through}
+  .group{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin:22px 2px 8px}
+  .group:first-child{margin-top:4px}
+  .sum{display:flex;justify-content:space-between;align-items:baseline;margin:2px 2px 12px}
+  .sum b{font-family:'Outfit',sans-serif;font-size:22px;font-weight:600}
+  .note{color:var(--muted);font-size:13px;margin:14px 2px 0}
+  .empty{color:var(--muted);text-align:center;padding:36px 12px}
+  .gate{text-align:center;color:var(--muted);padding:60px 10px}
+  footer{color:var(--faint);font-size:12px;text-align:center;margin-top:36px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><b>Garage</b><span>Hair Club</span></div>
+  <div id="gate" class="gate" hidden></div>
+  <div id="app" hidden>
+    <h1>Eloré lager</h1>
+    <div class="status"><i class="dot" id="dot"></i><span id="statusText"></span></div>
+    <div class="banner" id="banner" hidden></div>
+    <div class="tiles" id="tiles"></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div id="view"></div>
+    <footer>Siffrorna läses från Garages kassa. Varje paket räknas en gång.</footer>
+  </div>
+</div>
+<script>
+(function(){
+  'use strict';
+  var TZ='Europe/Madrid', DATA=null, TAB=null, MONTH=null, SHOW_ALL=false, SEARCH='';
+  var $=function(id){return document.getElementById(id)};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]})}
+  function fmt(d,o){return new Intl.DateTimeFormat('sv-SE',Object.assign({timeZone:TZ},o)).format(d)}
+  function hm(d){return fmt(d,{hour:'2-digit',minute:'2-digit'})}
+  function dayKey(d){return fmt(d,{year:'numeric',month:'2-digit',day:'2-digit'})}
+  function monthKey(d){return dayKey(d).slice(0,7)}
+  function monthName(k){var p=k.split('-');return fmt(new Date(Date.UTC(+p[0],+p[1]-1,15)),{month:'long',year:'numeric'})}
+  function dayName(d){return fmt(d,{weekday:'short',day:'numeric',month:'short'})}
+  function pName(p){return p.shade?(p.type+' '+p.shade+' '+p.length):p.type}
+  function packs(n){return n+' paket'}
+
+  function getKey(){
+    var m=/[#&]k=([0-9a-f]{32})/i.exec(location.hash), k=m?m[1]:null;
+    try{ if(k) localStorage.setItem('eloreKey',k); else k=localStorage.getItem('eloreKey'); }catch(e){}
+    return k;
+  }
+  function hexBytes(h){var a=new Uint8Array(h.length/2);for(var i=0;i<a.length;i++)a[i]=parseInt(h.substr(i*2,2),16);return a}
+  function b64Bytes(b){var s=atob(b.trim()),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return a}
+
+  function loadData(){
+    var k=getKey();
+    if(!k){ gate('Öppna sidan via länken du fått från Garage.'); return Promise.resolve(); }
+    return fetch('data.enc?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.text(); })
+      .then(function(t){
+        var raw=b64Bytes(t);
+        return crypto.subtle.importKey('raw',hexBytes(k),'AES-GCM',false,['decrypt'])
+          .then(function(key){return crypto.subtle.decrypt({name:'AES-GCM',iv:raw.slice(0,12)},key,raw.slice(12))});
+      })
+      .then(function(buf){ DATA=JSON.parse(new TextDecoder().decode(buf)); index(); render(); })
+      .catch(function(e){
+        if(DATA) return;
+        gate(e&&e.name==='OperationError'?'Länken stämmer inte. Be Garage om en ny.':'Det gick inte att hämta lagret. Försök igen om en stund.');
+      });
+  }
+  function gate(msg){ $('app').hidden=true; $('gate').hidden=false; $('gate').textContent=msg; }
+
+  var PROD={}, EVENTS=[];
+  function index(){
+    PROD={}; DATA.products.forEach(function(p){PROD[p.id]=p});
+    var live=DATA.go_live?new Date(DATA.go_live):null;
+    EVENTS=DATA.events.map(function(e){var d=new Date(e.at);return Object.assign({},e,{d:d,day:dayKey(d),month:monthKey(d)})})
+      .filter(function(e){return !live||e.d>=live});
+    EVENTS.sort(function(a,b){return b.d-a.d});
+  }
+  function soldIn(month){return EVENTS.reduce(function(n,e){return n+(e.month===month?e.sold:0)},0)}
+
+  function render(){
+    $('gate').hidden=true; $('app').hidden=false;
+    var live=!!DATA.go_live, now=new Date(), checked=new Date(DATA.checked_at);
+    var age=(now-checked)/60000, hour=+fmt(now,{hour:'2-digit',hour12:false}).slice(0,2);
+    var stale=age>75&&hour>=9&&hour<21;
+    $('dot').className='dot '+(stale?'warn':'ok');
+    var when=dayKey(checked)===dayKey(now)?hm(checked):(dayName(checked)+' '+hm(checked));
+    $('statusText').textContent=stale?('Senaste läsning '+when+'. Datorn i salongen svarar inte just nu.'):('Läst från kassan '+when);
+
+    var banner=$('banner');
+    if(!live){ banner.hidden=false; banner.textContent='Lagret är inte laddat än. Listan visar förslag på grundlager'+(DATA.par_confirmed?'.':', inte bekräftat.'); }
+    else if(!DATA.par_confirmed){ banner.hidden=false; banner.textContent='Grundnivåerna är ett förslag och inte bekräftade.'; }
+    else banner.hidden=true;
+
+    var stocked=DATA.products.filter(function(p){return p.par>0});
+    var parSum=stocked.reduce(function(n,p){return n+p.par},0);
+    var refill=DATA.products.filter(function(p){return p.refill>0});
+    var refillSum=refill.reduce(function(n,p){return n+p.refill},0);
+    var thisMonth=monthKey(now), mLabel=fmt(now,{month:'short'}).replace('.','');
+    var tiles;
+    if(live){
+      var onHand=DATA.products.reduce(function(n,p){return n+Math.max(p.on_hand||0,0)},0);
+      tiles=[[onHand,'På hyllan',''],[refillSum,'Fyll på',refillSum?'hot':''],[soldIn(thisMonth),'Sålt '+mLabel,'']];
+    } else {
+      tiles=[[parSum,'Grundlager',''],[stocked.length,'Varianter',''],[soldIn(thisMonth),'Sålt '+mLabel,'']];
+    }
+    $('tiles').innerHTML=tiles.map(function(t){return '<div class="tile '+t[2]+'"><div class="n">'+t[0]+'</div><div class="l">'+esc(t[1])+'</div></div>'}).join('');
+
+    var tabs=live?[['fill','Fyll på',refillSum||''],['stock','Lager',''],['sold','Sålt','']]:[['fill','Grundlager',''],['sold','Sålt','']];
+    if(!TAB||!tabs.some(function(t){return t[0]===TAB})) TAB=tabs[0][0];
+    $('tabs').innerHTML=tabs.map(function(t){return '<button class="tab" role="tab" data-tab="'+t[0]+'" aria-selected="'+(t[0]===TAB)+'">'+esc(t[1])+(t[2]!==''?'<span class="c">'+t[2]+'</span>':'')+'</button>'}).join('');
+    if(TAB==='fill') viewFill(refill,live); else if(TAB==='stock') viewStock(); else viewSold(live);
+  }
+
+  function prodRow(p,qHtml,cls){
+    return '<div class="row '+(cls||'')+'"><div class="main"><div class="t">'+esc(p.shade||p.type)+'</div><div class="s">'+esc(p.shade?(p.type+' · '+p.length):'')+'</div></div>'+qHtml+'</div>';
+  }
+  function viewFill(refill,live){
+    var v=$('view');
+    if(!refill.length){ v.innerHTML='<div class="list"><div class="empty">'+(live?'Hyllan är full. Inget att fylla på.':'Inget grundlager är satt än.')+'</div></div>'; return; }
+    refill=refill.slice().sort(function(a,b){return b.refill-a.refill||pName(a).localeCompare(pName(b),'sv')});
+    var total=refill.reduce(function(n,p){return n+p.refill},0);
+    v.innerHTML='<div class="tools"><div class="grow sum"><span>'+(live?'Att leverera':'Första leverans')+'</span><b>'+packs(total)+'</b></div><button class="btn" id="copy">Kopiera lista</button></div>'+
+      '<div class="list">'+refill.map(function(p){
+        return prodRow(p,'<div class="q fill">'+(live?'+':'')+p.refill+(live?'<small>'+p.on_hand+' av '+p.par+' på hyllan</small>':'<small>paket</small>')+'</div>');
+      }).join('')+'</div>';
+    $('copy').onclick=function(){
+      var head='Eloré '+(live?'påfyllning':'grundlager')+' Garage, '+fmt(new Date(),{day:'numeric',month:'short'})+' ('+packs(total)+')';
+      var txt=[head].concat(refill.map(function(p){return p.refill+' × '+pName(p)})).join('\n'), b=this;
+      var done=function(){b.textContent='Kopierat';setTimeout(function(){b.textContent='Kopiera lista'},1600)};
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done,function(){fallbackCopy(txt);done()});
+      else { fallbackCopy(txt); done(); }
+    };
+  }
+  function fallbackCopy(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+
+  function viewStock(){
+    var v=$('view'), q=SEARCH.trim().toLowerCase();
+    var rows=DATA.products.filter(function(p){
+      if(!SHOW_ALL&&!(p.par>0||p.on_hand!==0)) return false;
+      if(SHOW_ALL&&!p.active&&!p.on_hand) return false;
+      return !q||pName(p).toLowerCase().indexOf(q)>=0;
+    });
+    var html='<div class="tools"><input type="search" id="search" placeholder="Sök nyans eller typ" value="'+esc(SEARCH)+'" /><label class="chk"><input type="checkbox" id="all" '+(SHOW_ALL?'checked':'')+' /> Visa alla</label></div>';
+    if(!rows.length) html+='<div class="list"><div class="empty">Inga varianter matchar.</div></div>';
+    else{
+      var groups={}; rows.forEach(function(p){(groups[p.shade||'Övrigt']=groups[p.shade||'Övrigt']||[]).push(p)});
+      html+=Object.keys(groups).sort(function(a,b){return a.localeCompare(b,'sv')}).map(function(g){
+        return '<div class="group">'+esc(g)+'</div><div class="list">'+groups[g].map(function(p){
+          var cls=p.on_hand<0?'low':(p.refill>0?'fill':'');
+          return '<div class="row"><div class="main"><div class="t">'+esc(p.shade?(p.type+' · '+p.length):p.type)+'</div>'+(p.refill>0?'<div class="s">Fyll på '+p.refill+'</div>':'')+'</div><div class="q '+cls+'">'+p.on_hand+'<small>av '+p.par+'</small></div></div>';
+        }).join('')+'</div>';
+      }).join('');
+    }
+    v.innerHTML=html;
+    $('search').oninput=function(){SEARCH=this.value;var pos=this.selectionStart;viewStock();var s=$('search');s.focus();s.setSelectionRange(pos,pos)};
+    $('all').onchange=function(){SHOW_ALL=this.checked;viewStock()};
+  }
+
+  function viewSold(live){
+    var v=$('view'), months=[]; EVENTS.forEach(function(e){if(months.indexOf(e.month)<0)months.push(e.month)});
+    var cur=monthKey(new Date()); if(months.indexOf(cur)<0) months.unshift(cur);
+    months.sort().reverse();
+    if(!MONTH||months.indexOf(MONTH)<0) MONTH=months[0];
+    var ev=EVENTS.filter(function(e){return e.month===MONTH});
+    var total=ev.reduce(function(n,e){return n+e.sold},0);
+    var html='<div class="tools"><select id="month">'+months.map(function(m){return '<option value="'+m+'"'+(m===MONTH?' selected':'')+'>'+esc(monthName(m))+'</option>'}).join('')+'</select><div class="grow"></div><div class="sum" style="margin:0;gap:10px"><span>Sålt</span><b>'+packs(total)+'</b></div></div>';
+    if(!ev.length){ html+='<div class="list"><div class="empty">Inget sålt den här månaden.</div></div>'; }
+    else{
+      var per={}; ev.forEach(function(e){per[e.p]=(per[e.p]||0)+e.sold});
+      var ids=Object.keys(per).filter(function(id){return per[id]!==0}).sort(function(a,b){return per[b]-per[a]||pName(PROD[a]).localeCompare(pName(PROD[b]),'sv')});
+      html+='<div class="group">Per variant</div><div class="list">'+ids.map(function(id){return prodRow(PROD[id],'<div class="q">'+per[id]+'</div>')}).join('')+'</div>';
+      var days=[]; ev.forEach(function(e){if(days.indexOf(e.day)<0)days.push(e.day)});
+      html+=days.map(function(day){
+        var rows=ev.filter(function(e){return e.day===day});
+        return '<div class="group">'+esc(dayName(rows[0].d))+'</div><div class="list">'+rows.map(function(e){
+          var p=PROD[e.p]||{type:'Okänd variant',shade:'',length:''}, sub=[hm(e.d)], mute='', q=e.sold;
+          if(e.invoice) sub.push('Nota '+e.invoice);
+          if(e.kind==='sold'&&e.dup>0){
+            sub.push('Deposition. Räknas på nota '+e.dup_invoice+'.');
+            if(e.sold===0){ mute='mute'; q=e.dup; }
+          } else if(e.kind==='reversed'){ sub.push('Nota raderad'); }
+          else if(e.kind==='stock'){ sub.push(e.reason); q=(e.amount>0?'+':'')+e.amount; }
+          return '<div class="row '+mute+'"><div class="main"><div class="t">'+esc(pName(p))+'</div><div class="s">'+esc(sub.join(' · '))+'</div></div><div class="q">'+q+'</div></div>';
+        }).join('')+'</div>';
+      }).join('');
+    }
+    if(!live) html+='<p class="note">Historik före start. Underlaget för faktura börjar när lagret är laddat.</p>';
+    v.innerHTML=html;
+    $('month').onchange=function(){MONTH=this.value;viewSold(live)};
+  }
+
+  $('tabs').addEventListener('click',function(e){var b=e.target.closest('.tab');if(b){TAB=b.getAttribute('data-tab');render()}});
+  loadData();
+  setInterval(function(){ if(!document.hidden) loadData(); },60000);
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden) loadData(); });
+})();
+</script>
+</body>
+</html>
